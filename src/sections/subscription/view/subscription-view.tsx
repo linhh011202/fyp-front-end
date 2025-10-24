@@ -49,7 +49,7 @@ const plans: PlanType[] = [
 export function SubscriptionView(): ReactElement {
   const handleSubscribe = async (priceId: string) => {
     try {
-      const res = await fetch(`${import.meta.env.BACKEND_API_URL}/stripe-checkout-session`, {
+      const res = await fetch(`${import.meta.env.VITE_BACKEND_API_URL}/stripe-checkout-session`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
