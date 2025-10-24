@@ -57,7 +57,7 @@ All authentication endpoints from the API documentation have been successfully i
 ### 1. Environment Setup
 ```bash
 # Already created in .env
-VITE_API_URL=http://localhost:3000
+BACKEND_API_URL=http://localhost:3000
 ```
 
 ### 2. Test Authentication

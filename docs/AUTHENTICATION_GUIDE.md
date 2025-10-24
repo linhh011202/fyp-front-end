@@ -167,7 +167,7 @@ Public routes (no authentication required):
 Create a `.env` file in the root directory:
 
 ```env
-VITE_API_URL=http://localhost:3000
+BACKEND_API_URL=http://localhost:3000
 ```
 
 ### Token Management

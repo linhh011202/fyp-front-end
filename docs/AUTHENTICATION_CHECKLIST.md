@@ -127,7 +127,7 @@
 - [x] FetchOptions
 
 ### Environment Variables Typed
-- [x] VITE_API_URL in vite-env.d.ts
+- [x] BACKEND_API_URL in vite-env.d.ts
 - [x] ImportMetaEnv interface
 - [x] ImportMeta interface
 

@@ -59,7 +59,7 @@ All authentication endpoints from the API documentation have been successfully i
 ### 1. Set Environment Variable
 ```bash
 # .env file
-VITE_API_URL=http://localhost:3000
+BACKEND_API_URL=http://localhost:3000
 ```
 
 ### 2. Start Development Server
