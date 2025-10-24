@@ -15,6 +15,7 @@ import MenuItem, { menuItemClasses } from '@mui/material/MenuItem';
 import { useRouter, usePathname } from 'src/routes/hooks';
 
 import { _myAccount } from 'src/_mock';
+import { authService } from 'src/services/auth.service';
 
 // ----------------------------------------------------------------------
 
@@ -49,6 +50,29 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
     },
     [handleClosePopover, router]
   );
+
+  const handleLogout = useCallback(async () => {
+    try {
+      const accessToken = authService.getAccessToken();
+      
+      if (accessToken) {
+        // Call logout API
+        await authService.logout(accessToken);
+      }
+    } catch (error) {
+      // Continue with logout even if API call fails
+      console.error('Logout API error:', error);
+    } finally {
+      // Clear authentication data
+      authService.clearAuthData();
+      
+      // Close popover
+      handleClosePopover();
+      
+      // Redirect to sign-in page
+      router.push('/sign-in');
+    }
+  }, [handleClosePopover, router]);
 
   return (
     <>
@@ -129,7 +153,7 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Box sx={{ p: 1 }}>
-          <Button fullWidth color="error" size="medium" variant="text">
+          <Button fullWidth color="error" size="medium" variant="text" onClick={handleLogout}>
             Logout
           </Button>
         </Box>
