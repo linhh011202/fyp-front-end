@@ -31,6 +31,14 @@ export default defineConfig({
       },
     ],
   },
-  server: { port: PORT, host: true },
+  server: { 
+    port: PORT, 
+    host: true, 
+    hmr: {
+      protocol: 'ws',       // nếu sau này lên HTTPS thì dùng 'wss'
+      host: '20.196.72.17', // hoặc domain
+      clientPort: 80,       // (hoặc 8080 nếu bạn publish 8080)
+    },
+  },
   preview: { port: PORT, host: true },
 });

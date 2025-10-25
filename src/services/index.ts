@@ -7,6 +7,7 @@
 
 // Services
 export * from './auth.service';
+export * from './plans.service';
 
 // Re-export with named imports for convenience
 export { authService } from './auth.service';

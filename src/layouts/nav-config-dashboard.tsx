@@ -22,4 +22,9 @@ export const navData = [
     path: '/subscription',
     icon: icon('ic-cart'),
   },
+  {
+    title: 'Admin Plans',
+    path: '/admin/plans',
+    icon: icon('ic-user'),
+  },
 ];
