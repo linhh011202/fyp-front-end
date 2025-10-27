@@ -21,7 +21,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import FormControlLabel from '@mui/material/FormControlLabel';
 
 import { authService } from 'src/services/auth.service';
-import { DashboardContent } from 'src/layouts/dashboard';
 import { type Plan, plansService } from 'src/services/plans.service';
 
 import { Iconify } from 'src/components/iconify';
@@ -211,34 +210,33 @@ export function CreatePlansView(): ReactElement {
   };
 
   return (
-    <DashboardContent maxWidth="xl">
-      <Box sx={{ py: 4 }}>
-        {/* Header */}
-        <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-          <Box>
-            <Typography variant="h3" fontWeight="bold" gutterBottom>
-              Create Subscription Plans
-            </Typography>
-            <Typography variant="body1" color="text.secondary">
-              Design and publish new subscription plans for your users
-            </Typography>
-          </Box>
-          <Button
-            variant="contained"
-            size="large"
-            startIcon={<Iconify icon="mingcute:add-line" />}
-            onClick={handleAddPlan}
-            disabled={loading}
-          >
-            Add Plan
-          </Button>
+    <Box>
+      {/* Header */}
+      <Box sx={{ mb: 4, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+        <Box>
+          <Typography variant="h3" fontWeight="bold" gutterBottom>
+            Create Subscription Plans
+          </Typography>
+          <Typography variant="body1" color="text.secondary">
+            Design and publish new subscription plans for your users
+          </Typography>
         </Box>
+        <Button
+          variant="contained"
+          size="large"
+          startIcon={<Iconify icon="mingcute:add-line" />}
+          onClick={handleAddPlan}
+          disabled={loading}
+        >
+          Add Plan
+        </Button>
+      </Box>
 
-        {/* Alert Messages */}
-        {error && (
-          <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
-            {error}
-          </Alert>
+      {/* Alert Messages */}
+      {error && (
+        <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError(null)}>
+          {error}
+        </Alert>
         )}
 
         {success && (
@@ -485,7 +483,6 @@ export function CreatePlansView(): ReactElement {
             </Button>
           </DialogActions>
         </Dialog>
-      </Box>
-    </DashboardContent>
+    </Box>
   );
 }

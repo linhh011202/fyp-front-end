@@ -32,13 +32,16 @@ export default defineConfig({
     ],
   },
   server: { 
-    port: PORT, 
-    host: true, 
+    port: PORT,
+    // Bind to all network interfaces (0.0.0.0) to allow remote access via 20.196.72.17
+    host: '0.0.0.0',
     hmr: {
-      protocol: 'ws',       // nếu sau này lên HTTPS thì dùng 'wss'
-      host: '20.196.72.17', // hoặc domain
-      clientPort: 80,       // (hoặc 8080 nếu bạn publish 8080)
+      protocol: 'ws',
+      // The client should connect to the external IP where the browser accessed the page
+      host: '20.196.72.17',
+      // Use the same port as the dev server (not port 80) for HMR websocket
+      port: PORT,
     },
   },
-  preview: { port: PORT, host: true },
+  preview: { port: PORT, host: '0.0.0.0' },
 });

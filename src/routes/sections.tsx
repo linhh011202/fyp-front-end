@@ -1,8 +1,8 @@
 import type { RouteObject } from 'react-router';
 
 import { lazy, Suspense } from 'react';
-import { Outlet } from 'react-router-dom';
 import { varAlpha } from 'minimal-shared/utils';
+import { Outlet, Navigate } from 'react-router-dom';
 
 import Box from '@mui/material/Box';
 import LinearProgress, { linearProgressClasses } from '@mui/material/LinearProgress';
@@ -22,6 +22,8 @@ export const SignUpPage = lazy(() => import('src/pages/sign-up'));
 export const ProductsPage = lazy(() => import('src/pages/products'));
 export const SubscriptionPage = lazy(() => import('src/pages/subscription'));
 export const AdminPlansPage = lazy(() => import('src/pages/admin-plans'));
+export const SuccessPage = lazy(() => import('src/pages/success'));
+export const CancelPage = lazy(() => import('src/pages/cancel'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
 const renderFallback = () => (
@@ -56,7 +58,7 @@ export const routesSection: RouteObject[] = [
       </ProtectedRoute>
     ),
     children: [
-      { index: true, element: <DashboardPage /> },
+      { index: true, element: <Navigate to="/subscription" replace /> },
       { path: 'user', element: <UserPage /> },
       { path: 'products', element: <ProductsPage /> },
       { path: 'blog', element: <BlogPage /> },
@@ -79,6 +81,14 @@ export const routesSection: RouteObject[] = [
         <SignUpPage />
       </AuthLayout>
     ),
+  },
+  {
+    path: 'success',
+    element: <SuccessPage />,
+  },
+  {
+    path: 'cancel',
+    element: <CancelPage />,
   },
   {
     path: '404',

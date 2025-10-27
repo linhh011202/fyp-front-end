@@ -7,10 +7,14 @@
 
 // Services
 export * from './auth.service';
+export * from './user.service';
 export * from './plans.service';
+export * from './stripe.service';
 
 // Re-export with named imports for convenience
 export { authService } from './auth.service';
+export { userService } from './user.service';
+export { stripeService } from './stripe.service';
 export type {
   ApiError,
   LoginRequest,

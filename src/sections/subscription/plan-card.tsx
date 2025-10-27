@@ -18,9 +18,10 @@ import { Iconify } from 'src/components/iconify';
 interface PlanCardProps {
   plan: Plan;
   onSubscribe: (priceId: string) => void;
+  disabled?: boolean;
 }
 
-export function PlanCard({ plan, onSubscribe }: PlanCardProps): ReactElement {
+export function PlanCard({ plan, onSubscribe, disabled = false }: PlanCardProps): ReactElement {
   return (
     <Card
       sx={{
@@ -97,6 +98,7 @@ export function PlanCard({ plan, onSubscribe }: PlanCardProps): ReactElement {
           variant="contained"
           size="large"
           onClick={() => onSubscribe(plan.priceId)}
+          disabled={disabled}
           sx={{
             mt: 4,
             py: 1.5,

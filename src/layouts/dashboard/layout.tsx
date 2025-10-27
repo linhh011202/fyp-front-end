@@ -1,6 +1,7 @@
 import type { Breakpoint } from '@mui/material/styles';
 
 import { merge } from 'es-toolkit';
+import { useState, useEffect } from 'react';
 import { useBoolean } from 'minimal-shared/hooks';
 
 import Box from '@mui/material/Box';
@@ -8,18 +9,19 @@ import Alert from '@mui/material/Alert';
 import { useTheme } from '@mui/material/styles';
 
 import { _langs, _notifications } from 'src/_mock';
+import { userService } from 'src/services/user.service';
 
 import { NavMobile, NavDesktop } from './nav';
 import { layoutClasses } from '../core/classes';
 import { _account } from '../nav-config-account';
 import { dashboardLayoutVars } from './css-vars';
-import { navData } from '../nav-config-dashboard';
 import { MainSection } from '../core/main-section';
 import { Searchbar } from '../components/searchbar';
 import { _workspaces } from '../nav-config-workspace';
 import { MenuButton } from '../components/menu-button';
 import { HeaderSection } from '../core/header-section';
 import { LayoutSection } from '../core/layout-section';
+import { getNavDataByRole } from '../nav-config-dashboard';
 import { AccountPopover } from '../components/account-popover';
 import { LanguagePopover } from '../components/language-popover';
 import { NotificationsPopover } from '../components/notifications-popover';
@@ -50,6 +52,24 @@ export function DashboardLayout({
   const theme = useTheme();
 
   const { value: open, onFalse: onClose, onTrue: onOpen } = useBoolean();
+  
+  // Fetch user role and filter navigation
+  const [navData, setNavData] = useState(getNavDataByRole(null)); // Default to showing subscription only
+
+  useEffect(() => {
+    const fetchUserRole = async () => {
+      try {
+        const user = await userService.getCurrentUser();
+        setNavData(getNavDataByRole(user.role));
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+        // If error, show only subscription
+        setNavData(getNavDataByRole(null));
+      }
+    };
+
+    fetchUserRole();
+  }, []);
 
   const renderHeader = () => {
     const headerSlotProps: HeaderSectionProps['slotProps'] = {

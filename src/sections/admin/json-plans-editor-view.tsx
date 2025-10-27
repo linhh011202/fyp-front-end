@@ -15,7 +15,6 @@ import DialogContent from '@mui/material/DialogContent';
 import CircularProgress from '@mui/material/CircularProgress';
 
 import { authService } from 'src/services/auth.service';
-import { DashboardContent } from 'src/layouts/dashboard';
 import { type Plan, plansService } from 'src/services/plans.service';
 
 import { Iconify } from 'src/components/iconify';
@@ -328,19 +327,18 @@ export function JsonPlansEditorView(): ReactElement {
   };
 
   return (
-    <DashboardContent maxWidth="xl">
-      <Box sx={{ py: 4 }}>
-        {/* Header */}
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h3" fontWeight="bold" gutterBottom>
-            Plans JSON Editor
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Edit plans as JSON, compare with the latest version, and publish
-          </Typography>
-        </Box>
+    <Box>
+      {/* Header */}
+      <Box sx={{ mb: 4 }}>
+        <Typography variant="h3" fontWeight="bold" gutterBottom>
+          Plans JSON Editor
+        </Typography>
+        <Typography variant="body1" color="text.secondary">
+          Edit plans as JSON, compare with the latest version, and publish
+        </Typography>
+      </Box>
 
-        {/* Alert Messages */}
+      {/* Alert Messages */}
         {backendError && (
           <Alert severity="warning" sx={{ mb: 3 }}>
             <Typography variant="subtitle2" gutterBottom>
@@ -554,7 +552,6 @@ export function JsonPlansEditorView(): ReactElement {
             </Button>
           </DialogActions>
         </Dialog>
-      </Box>
-    </DashboardContent>
+    </Box>
   );
 }
