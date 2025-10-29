@@ -3,6 +3,7 @@ import type { IconButtonProps } from '@mui/material/IconButton';
 import { useState, useCallback } from 'react';
 
 import Box from '@mui/material/Box';
+import Alert from '@mui/material/Alert';
 import Button from '@mui/material/Button';
 import Avatar from '@mui/material/Avatar';
 import Popover from '@mui/material/Popover';
@@ -34,6 +35,7 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
   const pathname = usePathname();
 
   const [openPopover, setOpenPopover] = useState<HTMLButtonElement | null>(null);
+  const [showGoogleLogoutInfo, setShowGoogleLogoutInfo] = useState(false);
 
   const handleOpenPopover = useCallback((event: React.MouseEvent<HTMLButtonElement>) => {
     setOpenPopover(event.currentTarget);
@@ -63,14 +65,20 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
       // Continue with logout even if API call fails
       console.error('Logout API error:', error);
     } finally {
-      // Clear authentication data
+      // Clear authentication data from localStorage
       authService.clearAuthData();
       
-      // Close popover
-      handleClosePopover();
+      // Show info about Google logout (optional - comment out if not needed)
+      setShowGoogleLogoutInfo(true);
       
-      // Redirect to sign-in page
-      router.push('/sign-in');
+      // Wait a moment for user to see the message, then redirect
+      setTimeout(() => {
+        // Close popover
+        handleClosePopover();
+        
+        // Redirect to sign-in page
+        router.push('/sign-in');
+      }, 1500);
     }
   }, [handleClosePopover, router]);
 
@@ -153,7 +161,12 @@ export function AccountPopover({ data = [], sx, ...other }: AccountPopoverProps)
         <Divider sx={{ borderStyle: 'dashed' }} />
 
         <Box sx={{ p: 1 }}>
-          <Button fullWidth color="error" size="medium" variant="text" onClick={handleLogout}>
+          {showGoogleLogoutInfo ? (
+            <Alert severity="info" sx={{ mb: 1, fontSize: '0.75rem' }}>
+              Logged out successfully! Next Google login will ask for account selection.
+            </Alert>
+          ) : null}
+          <Button fullWidth color="error" size="medium" variant="text" onClick={handleLogout} disabled={showGoogleLogoutInfo}>
             Logout
           </Button>
         </Box>

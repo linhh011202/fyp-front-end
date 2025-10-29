@@ -79,6 +79,11 @@ export function SignInView() {
     }
   }, [email, password, router]);
 
+  const handleGoogleLogin = useCallback(() => {
+    // Redirect to Google OAuth
+    authService.initiateGoogleLogin();
+  }, []);
+
   const renderForm = (
     <Box
       sx={{
@@ -188,7 +193,7 @@ export function SignInView() {
           justifyContent: 'center',
         }}
       >
-        <IconButton color="inherit">
+        <IconButton color="inherit" onClick={handleGoogleLogin}>
           <Iconify width={22} icon="socials:google" />
         </IconButton>
         <IconButton color="inherit">

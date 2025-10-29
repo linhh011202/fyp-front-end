@@ -24,6 +24,7 @@ export const SubscriptionPage = lazy(() => import('src/pages/subscription'));
 export const AdminPlansPage = lazy(() => import('src/pages/admin-plans'));
 export const SuccessPage = lazy(() => import('src/pages/success'));
 export const CancelPage = lazy(() => import('src/pages/cancel'));
+export const GoogleCallbackPage = lazy(() => import('src/pages/google-callback'));
 export const Page404 = lazy(() => import('src/pages/page-not-found'));
 
 const renderFallback = () => (
@@ -81,6 +82,10 @@ export const routesSection: RouteObject[] = [
         <SignUpPage />
       </AuthLayout>
     ),
+  },
+  {
+    path: 'auth/google/callback',
+    element: <GoogleCallbackPage />,
   },
   {
     path: 'success',

@@ -35,6 +35,7 @@ export default defineConfig({
     port: PORT,
     // Bind to all network interfaces (0.0.0.0) to allow remote access via 20.196.72.17
     host: '0.0.0.0',
+    allowedHosts: ['dinh.koreacentral.cloudapp.azure.com'],
     hmr: {
       protocol: 'ws',
       // The client should connect to the external IP where the browser accessed the page
